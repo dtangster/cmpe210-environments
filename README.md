@@ -6,13 +6,13 @@ It allows you to spin up an environment for Ryu, Mininet, and Flowvisor.
 
 ## Prerequisites
 
-Your machine you plan to run these instructions on must be Linux based. Although
+The machine you plan to use to run these instructions on must be Linux based. Although
 containers are often advertised as write once run anywhere, that is not completely true.
 
 Mac OSX and Windows version of docker-ce uses an emulated linux kernel. By chance,
 Mininet happens to require a kernel module and it won't be able to find what it needs.
 
-If you not running Linux, consider spinning up a Linux distribution in a VM.
+If you are not running Linux, consider spinning up a Linux distribution in a VM.
 
 ## Environment Setup
 
