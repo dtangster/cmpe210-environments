@@ -1,0 +1,26 @@
+version: '3'
+services:
+  ryu:
+    image: ryu:latest
+    build:
+      context: ryu
+      dockerfile: Dockerfile
+    privileged: true
+    ports:
+      - ${PORT:-8080}:${PORT:-8080}
+  mininet:
+    image: mininet:latest
+    build:
+      context: mininet
+      dockerfile: Dockerfile
+    depends_on:
+      - ryu
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  flowvisor:
+    image: flowvisor:latest
+    build:
+      context: flowvisor
+      dockerfile: Dockerfile
+    privileged: true
