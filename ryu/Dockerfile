@@ -9,9 +9,6 @@ RUN apt-get update \
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
-#RUN git clone -b v${RYU_VERSION} ${RYU_REPO}
-#ENV PYTHONPATH /ryu
-
 COPY controller.py /
 
 ENTRYPOINT ["ryu-manager", "controller.py"]

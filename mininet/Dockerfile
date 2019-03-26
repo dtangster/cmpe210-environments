@@ -13,6 +13,4 @@ RUN pip install -r requirements.txt
 
 COPY start.sh topology.py /
 
-RUN service openvswitch-switch start
-
 ENTRYPOINT ["/start.sh"]
