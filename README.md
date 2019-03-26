@@ -18,8 +18,8 @@ If you are not running Linux, consider spinning up a Linux distribution in a VM.
 
 1. Install docker-ce. Follow the instructions from one of the following links:
 
-https://docs.docker.com/install/linux/docker-ce/debian/
-https://docs.docker.com/install/linux/docker-ce/ubuntu/
+https://docs.docker.com/install/linux/docker-ce/debian/ 
+https://docs.docker.com/install/linux/docker-ce/ubuntu/ 
 https://docs.docker.com/install/linux/docker-ce/fedora/
 
 2. Install docker-compose
@@ -75,7 +75,7 @@ We are binding the host port to the container port. Since this project starts up
 Floodlight and they both occupy the same port for the UI, we cannot use the same ports for
 both on the host.
 
-Ryu port mapping:  8080 -> 8080
+Ryu port mapping:  8080 -> 8080 
 Flowlight port mapping:  8090 -> 8080
 
 The above means that if you want to access the UI, you will need to type in one of the
@@ -83,7 +83,7 @@ following in the browser:
 
 <HOST_IP>:8080/<REMAINING_URL>
 
-of
+or
 
 <HOST_IP>:8090/<REMAINING_URL>
 
