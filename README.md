@@ -52,6 +52,16 @@ Once you have found the container id, run:
 docker exec -it <CONTAINER ID> bash
 ```
 
+## Communicating among containers
+
+When you are inside a container, you can refer to another container by its service name
+rather than IP address. For instance:
+```bash
+docker exec -it <MININET_ID> bash
+# You should get a bash prompt inside the container
+ping ryu
+```
+
 ## Making changes to example code
 
 If you want to make changes to the Ryu controller or Mininet topology code, feel
