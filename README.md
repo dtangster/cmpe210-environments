@@ -4,6 +4,9 @@ This project was created to more easily spin up environments we commonly use in 
 
 It allows you to spin up an environment for Ryu, Floodlight, Mininet, and Flowvisor.
 
+The default application currently spins up an arbitrary Mininet topology and does a
+`pingall` every 30 seconds while connected to a specific controller.
+
 ## Prerequisites
 
 The machine you plan to use to run these instructions on must be Linux based. Although
