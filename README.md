@@ -1,4 +1,8 @@
-# Setup environment
+# CMPE210 Environments
+
+This project was created to more easily spin up environments we commonly use in class.
+
+It allows you to spin up an environment for Ryu, Mininet, and Flowvisor.
 
 ## Prerequisites
 
