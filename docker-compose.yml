@@ -7,12 +7,22 @@ services:
       dockerfile: Dockerfile
     privileged: true
     ports:
-      - ${PORT:-8080}:${PORT:-8080}
+      - ${RYU_PORT:-8080}:8080
+  floodlight:
+    image: floodlight:latest
+    build:
+      context: floodlight
+      dockerfile: Dockerfile
+    privileged: true
+    ports:
+      - ${FLOODLIGHT_PORT:-8090}:8080
   mininet:
     image: mininet:latest
     build:
       context: mininet
       dockerfile: Dockerfile
+    environment:
+      - CONTROLLER=${CONTROLLER:-ryu}
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

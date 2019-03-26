@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 from time import sleep
 
 import docker
@@ -10,12 +11,13 @@ from mininet.log import setLogLevel, info
 
 
 def simple_topology():
+    controller = os.environ['CONTROLLER']  # This is either 'ryu' or 'floodlight'
     docker_client = docker.from_env()
     ip = None
 
     for c in docker_client.containers.list():
         for network in c.attrs['NetworkSettings']['Networks'].values():
-            if 'ryu' in network['Aliases']:
+            if controller in network['Aliases']:
                 ip = network['IPAddress']
                 break
         if ip:
@@ -26,8 +28,8 @@ def simple_topology():
 
     net = Mininet(controller=RemoteController, autoSetMacs=True)
 
-    info('*** Adding controller\n')
-    net.addController('ryu', ip=ip, port=6653)
+    info(f'*** Adding remote controller: {controller}\n')
+    net.addController(controller, ip=ip, port=6653)
 
     info('*** Adding hosts\n')
     h2 = net.addHost('h2', ip='10.0.0.12')
