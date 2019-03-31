@@ -1,15 +1,5 @@
 version: '3'
 services:
-  mininet:
-    image: mininet:latest
-    build:
-      context: mininet
-      dockerfile: Dockerfile
-    environment:
-      - CONTROLLER=${CONTROLLER:-ryu}
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
   ryu:
     image: ryu:latest
     build:

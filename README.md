@@ -18,15 +18,14 @@ The image/container name is `onstutorial`. This image has the following:
 
 # Doing the Flowvisor Exercise
 
-THIS DOES NOT WORK YET!!!
-
 There seem to be issues with the `beacon` binary and you cannot execute it. As a workaround,
 you can use the `ryu` and `floodlight` controllers to finish the tutorial. In order to do this,
 perform the following:
 
-1. In `docker-compose.yml`, delete the mininet section. This service will spin up a network
-that connects to the Ryu controller by default. We want to disable this to free up the
-controller for the exercise.
+1. We only want to spin up the `onstutorial` container when doing this exercise.
+```bash
+docker-compose up --build onstutorial
+```
 
 2. All repositories are checked out at `/`. When starting the Mininet network, run the
 following instead:
@@ -35,15 +34,40 @@ mn --custom /onstutorial/flowvisor_scripts/flowvisor_topo.py \
    --topo fvtopo --link tc --controller remote --mac --arp
 ```
 
-3. When you see steps that asks you to add a slice like the following:
+3. Start following the tutorial from the following command
 ```bash
-fvctl -f /dev/null add-slice upper tcp:localhost:10001 admin@upperslice
-fvctl -f /dev/null add-slice lower tcp:localhost:10002 admin@lowerslice
-fvctl -f /dev/null add-slice video tcp:localhost:10001 admin@videoslice
-fvctl -f /dev/null add-slice non-video tcp:localhost:10002 admin@nonvideoslice
+sudo /etc/init.d/flowvisor start
 ```
-Change `tcp:localhost:10001` to `tcp:ryu:6653`.
-Change `tcp:localhost:10002` to `tcp:floowlight:6653`.
+
+Whenever you see errors like `/root/.pyenv/libexec/pyenv: line 44: cd: fvctl-json: Not a directory`,
+ignore it.
+
+4. Replace steps that require you to start up the controller.
+
+When you run the commands below you might see errors like `error: [Errno 98] Address already in use`.
+You can ignore this error.
+
+Replace
+```bash
+cd ~/onstutorial/beacon-fvexercise-controller1
+./beacon
+```
+with
+```bash
+cd /ryu
+PYTHONPATH=. bin/ryu-manager ryu/app/simple_switch.py &
+```
+
+Replace
+```bash
+cd ~/onstutorial/beacon-fvexercise-controller2
+./beacon
+```
+with
+```bash
+cd /ryu2
+PYTHONPATH=. bin/ryu-manager ryu/app/simple_switch.py &
+```
 
 ## Prerequisites
 
