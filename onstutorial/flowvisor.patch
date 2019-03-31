@@ -1,0 +1,15 @@
+diff --git a/src/org/flowvisor/config/FVConfig.java b/src/org/flowvisor/config/FVConfig.java
+index 7b1988a..c674013 100644
+--- a/src/org/flowvisor/config/FVConfig.java
++++ b/src/org/flowvisor/config/FVConfig.java
+@@ -522,9 +522,7 @@ public class FVConfig {
+ 		if (args.length > 1)
+ 			passwd = args[1];
+ 		else
+-			passwd = FVConfig
+-					.readPasswd("Enter password for account 'fvadmin' on the flowvisor:");
+-		
++			passwd = "";
+ 		
+ 		System.err.println("Generating default config in db");
+ 		

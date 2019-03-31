@@ -7,6 +7,45 @@ It allows you to spin up an environment for Ryu, Floodlight, Mininet, and Flowvi
 The default application currently spins up an arbitrary Mininet topology and does a
 `pingall` every 30 seconds while connected to the Ryu controller.
 
+Included is also a Docker environment that allows you to try out the Flowvisor Exercise
+found at: https://github.com/onstutorial/onstutorial/wiki/Flowvisor-Exercise
+
+The image/container name is `onstutorial`. This image has the following:
+
+1. Mininet
+2. Flowvisor
+3. The Flowvisor exercise cloned into /onstutorial
+
+# Doing the Flowvisor Exercise
+
+There seem to be issues with the `beacon` binary and you cannot execute it. As a workaround,
+you can use the `ryu` and `floodlight` controllers to finish the tutorial. In order to do this,
+perform the following:
+
+1. In `docker-compose.yml`, delete the mininet section. This service will spin up a network
+that connects to the Ryu controller by default. We want to disable this to free up the
+controller for the exercise.
+
+2. All repositories are checked out at `/`. When starting the Mininet network, run the
+following instead:
+```bash
+mn --custom /onstutorial/flowvisor_scripts/flowvisor_topo.py \
+   --topo fvtopo --link tc --controller remote --mac --arp
+```
+
+3. When doing the initial Flowvisor setup, start with the following line of code from the
+tutorial: `fvctl -f /dev/null set-config --enable-topo-ctrl`
+
+4. When you see steps that asks you to add a slice like the following:
+```bash
+fvctl -f /dev/null add-slice upper tcp:localhost:10001 admin@upperslice
+fvctl -f /dev/null add-slice lower tcp:localhost:10002 admin@lowerslice
+fvctl -f /dev/null add-slice video tcp:localhost:10001 admin@videoslice
+fvctl -f /dev/null add-slice non-video tcp:localhost:10002 admin@nonvideoslice
+```
+Change `tcp:localhost:10001` to `tcp:ryu:6653`.
+Change `tcp:localhost:10002` to `tcp:floowlight:6653`.
+
 ## Prerequisites
 
 The machine you plan to use to run these instructions on must be Linux based. Although

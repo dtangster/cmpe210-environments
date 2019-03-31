@@ -1,5 +1,15 @@
 version: '3'
 services:
+  mininet:
+    image: mininet:latest
+    build:
+      context: mininet
+      dockerfile: Dockerfile
+    environment:
+      - CONTROLLER=${CONTROLLER:-ryu}
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   ryu:
     image: ryu:latest
     build:
@@ -16,19 +26,15 @@ services:
     privileged: true
     ports:
       - ${FLOODLIGHT_PORT:-8090}:8080
-  mininet:
-    image: mininet:latest
-    build:
-      context: mininet
-      dockerfile: Dockerfile
-    environment:
-      - CONTROLLER=${CONTROLLER:-ryu}
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
   flowvisor:
     image: flowvisor:latest
     build:
       context: flowvisor
+      dockerfile: Dockerfile
+    privileged: true
+  onstutorial:
+    image: onstutorial:latest
+    build:
+      context: onstutorial
       dockerfile: Dockerfile
     privileged: true
