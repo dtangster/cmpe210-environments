@@ -1,5 +1,15 @@
 version: '3'
 services:
+  mininet:
+    image: mininet:latest
+    build:
+      context: mininet
+      dockerfile: Dockerfile
+    environment:
+      - CONTROLLER=${CONTROLLER:-ryu}
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   ryu:
     image: ryu:latest
     build:
@@ -28,3 +38,8 @@ services:
       context: onstutorial
       dockerfile: Dockerfile
     privileged: true
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - ./display/socket:/tmp/.X11-unix
+      - ./display/XAuthority:/root/.Xauthority
