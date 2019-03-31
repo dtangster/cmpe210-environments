@@ -18,6 +18,8 @@ The image/container name is `onstutorial`. This image has the following:
 
 # Doing the Flowvisor Exercise
 
+THIS DOES NOT WORK YET!!!
+
 There seem to be issues with the `beacon` binary and you cannot execute it. As a workaround,
 you can use the `ryu` and `floodlight` controllers to finish the tutorial. In order to do this,
 perform the following:
@@ -33,10 +35,7 @@ mn --custom /onstutorial/flowvisor_scripts/flowvisor_topo.py \
    --topo fvtopo --link tc --controller remote --mac --arp
 ```
 
-3. When doing the initial Flowvisor setup, start with the following line of code from the
-tutorial: `fvctl -f /dev/null set-config --enable-topo-ctrl`
-
-4. When you see steps that asks you to add a slice like the following:
+3. When you see steps that asks you to add a slice like the following:
 ```bash
 fvctl -f /dev/null add-slice upper tcp:localhost:10001 admin@upperslice
 fvctl -f /dev/null add-slice lower tcp:localhost:10002 admin@lowerslice
